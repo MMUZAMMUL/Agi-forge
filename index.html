@@ -95,6 +95,11 @@ a{color:var(--accent2)}
 .agi-div{font-size:11px;color:var(--text2);margin-top:1px}
 .agi-desc{font-size:12px;color:var(--text2);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .pipeline-badge{background:var(--purple);color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fav-btn{flex-shrink:0;background:none;border:none;font-size:20px;line-height:1;cursor:pointer;color:var(--text2);padding:4px 4px;transition:transform .12s ease}
+.fav-btn.on{color:var(--accent2)}
+.fav-btn:active{transform:scale(1.3)}
+.list-section{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);padding:12px 6px 6px;display:flex;align-items:center;gap:7px}
+.list-section .ls-line{flex:1;height:1px;background:var(--border)}
 
 /* ── CHAT SCREEN ── */
 .chat-header{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
@@ -776,23 +781,52 @@ function setDiv(d){
   document.querySelectorAll('.div-tab').forEach(b=>b.classList.toggle('on',(!d&&b.textContent.trim().startsWith('All'))||(d&&b.textContent.trim().startsWith(d))));
   renderList();
 }
-function renderList(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const f=AGENTS.filter(a=>(!q||a.name.toLowerCase().includes(q)||a.description.toLowerCase().includes(q)||a.division.includes(q))&&(!selectedDiv||a.division===selectedDiv));
-  if(!f.length){document.getElementById('agent-list').innerHTML='<div style="padding:24px;text-align:center;color:var(--text2)">No agents found</div>';return;}
-  document.getElementById('agent-list').innerHTML=f.map(a=>{
-    const h=colorHex(a.color);
-    const plIdx=pipeline.findIndex(p=>p.id===a.id);
-    const badge=plIdx>=0?`<div class="pipeline-badge">${plIdx+1}</div>`:'';
-    const cls=plIdx>=0?'agent-item in-pipeline':'agent-item';
-    return `<div class="${cls}" onclick="agentTap('${a.id}')">
+// ── Favorites ─────────────────────────────────────────────────────────────────
+function getFavs(){ try{ return JSON.parse(localStorage.getItem('ag_favs')||'[]'); }catch(e){ return []; } }
+function isFav(id){ return getFavs().includes(id); }
+function toggleFav(id){
+  const favs=getFavs(); const i=favs.indexOf(id);
+  if(i>=0) favs.splice(i,1); else favs.unshift(id);
+  localStorage.setItem('ag_favs', JSON.stringify(favs));
+  renderList();
+}
+// Curated "Popular" picks shown on the home screen (ids that exist in AGENTS)
+const POPULAR_IDS=['engineering-backend-architect','engineering-frontend-developer','engineering-ai-engineer','marketing-growth-hacker','product-manager','design-ui-designer','marketing-seo-specialist','security-penetration-tester','business-strategist','marketing-content-creator'];
+
+function agentCard(a){
+  const h=colorHex(a.color);
+  const plIdx=pipeline.findIndex(p=>p.id===a.id);
+  const badge=plIdx>=0?`<div class="pipeline-badge">${plIdx+1}</div>`:'';
+  const cls=plIdx>=0?'agent-item in-pipeline':'agent-item';
+  const fav=isFav(a.id);
+  return `<div class="${cls}" onclick="agentTap('${a.id}')">
       <div class="agi-emoji" style="background:${h}22;color:${h};border:1px solid ${h}44">${a.emoji}</div>
       <div class="agi-info">
         <div class="agi-name">${a.name}</div>
         <div class="agi-div">${a.division}</div>
         <div class="agi-desc">${a.description}</div>
-      </div>${badge}</div>`;
-  }).join('');
+      </div>
+      <button class="fav-btn ${fav?'on':''}" onclick="event.stopPropagation();toggleFav('${a.id}')" title="${fav?'Remove favorite':'Add favorite'}">${fav?'★':'☆'}</button>${badge}</div>`;
+}
+function section(label){ return `<div class="list-section">${label}<span class="ls-line"></span></div>`; }
+
+function renderList(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const el=document.getElementById('agent-list');
+  // Home view (no search, no division filter, not in pipeline mode): show shelves
+  if(!q && !selectedDiv && !pipelineMode){
+    const favs=getFavs().map(id=>AGENTS.find(a=>a.id===id)).filter(Boolean);
+    const popular=POPULAR_IDS.map(id=>AGENTS.find(a=>a.id===id)).filter(Boolean);
+    let html='';
+    if(favs.length) html+=section('⭐ Your Favorites')+favs.map(agentCard).join('');
+    html+=section('🔥 Popular')+popular.map(agentCard).join('');
+    html+=section(`📁 All Specialists · ${AGENTS.length}`)+AGENTS.map(agentCard).join('');
+    el.innerHTML=html;
+    return;
+  }
+  const f=AGENTS.filter(a=>(!q||a.name.toLowerCase().includes(q)||a.description.toLowerCase().includes(q)||a.division.includes(q))&&(!selectedDiv||a.division===selectedDiv));
+  if(!f.length){el.innerHTML='<div style="padding:24px;text-align:center;color:var(--text2)">No agents found</div>';return;}
+  el.innerHTML=f.map(agentCard).join('');
 }
 function agentTap(id){
   if(pipelineMode){ togglePipelineAgent(id); }
