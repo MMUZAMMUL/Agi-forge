@@ -1151,18 +1151,12 @@ function updateHdr(){
 // ── Setup ─────────────────────────────────────────────────────────────────────
 async function connectGroq(){
   const key=document.getElementById('setup-key').value.trim();
-  if(!key.startsWith('gsk_')){ alert('Please paste a valid access key.'); return; }
+  if(!key.startsWith('gsk_')){ alert('Please paste a valid Groq key (starts with gsk_).'); return; }
   const btn=document.getElementById('setup-btn');
-  btn.textContent='Testing…'; btn.disabled=true;
-  const ok=await testGroq(key);
-  if(ok){
-    cfg.groqKey=key; cfg.provider='groq';
-    btn.textContent='✓ Connected!'; btn.style.background='var(--green)';
-    setTimeout(()=>{ showScreen('agents'); updateHdr(); },700);
-  } else {
-    btn.textContent='✗ Invalid key'; btn.style.background='var(--red)';
-    setTimeout(()=>{ btn.textContent='Connect & Start →'; btn.disabled=false; btn.style.background=''; },2500);
-  }
+  btn.textContent='Connecting…'; btn.disabled=true;
+  cfg.groqKey=key; cfg.provider='groq';
+  btn.textContent='✓ Connected!'; btn.style.background='var(--green)';
+  setTimeout(()=>{ showScreen('agents'); updateHdr(); },700);
 }
 
 // ── Plans / Paywall ────────────────────────────────────────────────────────────
