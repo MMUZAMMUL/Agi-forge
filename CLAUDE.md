@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this project is
 
-AgentForge is a mobile-first agentic AI platform — a single `index.html` web app with 183 curated AI specialists. Runs 100% in the browser, no build step, no server needed. Live at: **https://mmuzammul.github.io/Agi-forge/**
+AgentForge is a mobile-first agentic AI platform — a single `index.html` web app with 247 curated AI specialists. Runs 100% in the browser, no build step, no server needed. Live at: **https://mmuzammul.github.io/Agi-forge/**
 
 This is a completely independent, original-branded project by mmuzammul. All branding is "AgentForge" only — no references to "AGI repo", "mobile.html", or any other repo.
 

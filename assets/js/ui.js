@@ -85,20 +85,34 @@ function colorHex(c){
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}
 function md(s){
-  return String(s)
+  // Extract code blocks / inline code into placeholders BEFORE escaping, so the
+  // limited markdown transform never runs over raw HTML from LLM output. This
+  // closes the XSS gap: any literal <tag> in ordinary paragraph text is escaped
+  // below, while md()'s own generated tags (added after escaping) stay intact.
+  // Sentinels are plain ASCII (no &<>* chars) so they survive the escape pass
+  // and aren't touched by the markdown regexes; the @@ wrappers make a
+  // collision with real model output effectively impossible.
+  const blocks=[];
+  const hold=html=>'@@CB'+(blocks.push(html)-1)+'@@';
+  let out=String(s)
     .replace(/```(\w*)\n?([\s\S]*?)```/g,(_,lang,c)=>{
       const raw=c.trim();
       const id='code-'+Math.random().toString(36).slice(2,8);
       const isHTML=(lang||'').toLowerCase()==='html'||/^\s*<(!doctype|html|div|body|head|section|main)/i.test(raw);
       const preview=isHTML?`<button class="ctool prev" onclick="previewCode('${id}')">⬚ Preview</button>`:'';
-      return `<div class="code-block-wrap"><pre><code id="${id}" data-lang="${lang||''}" data-raw="${encodeURIComponent(raw)}">${esc(raw)}</code></pre><div class="code-tools">${preview}<button class="ctool save" onclick="saveCode('${id}')">💾 Save</button><button class="run-code-btn" onclick="runCode('${id}')">▶ Run</button></div></div>`;
+      return hold(`<div class="code-block-wrap"><pre><code id="${id}" data-lang="${lang||''}" data-raw="${encodeURIComponent(raw)}">${esc(raw)}</code></pre><div class="code-tools">${preview}<button class="ctool save" onclick="saveCode('${id}')">💾 Save</button><button class="run-code-btn" onclick="runCode('${id}')">▶ Run</button></div></div>`);
     })
-    .replace(/`([^`\n]+)`/g,(_,c)=>`<code>${esc(c)}</code>`)
+    .replace(/`([^`\n]+)`/g,(_,c)=>hold(`<code>${esc(c)}</code>`));
+  // Escape any remaining raw HTML in ordinary text (manual, not esc() — esc()
+  // turns newlines into <br>, which the paragraph/list logic below relies on).
+  out=out.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')
     .replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^# (.+)$/gm,'<h1>$1</h1>')
     .replace(/^---$/gm,'<hr>').replace(/^[-*] (.+)$/gm,'<li>$1</li>')
     .replace(/(<li>[\s\S]+?<\/li>)/g,'<ul>$1</ul>')
     .replace(/\n\n+/g,'</p><p>').replace(/^(?!<[hupoli])(.+)$/gm,s=>s?`<p>${s}</p>`:'');
+  // Restore extracted code blocks
+  return out.replace(/@@CB(\d+)@@/g,(_,i)=>blocks[+i]);
 }
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
@@ -127,7 +141,7 @@ async function fetchAgentContent(a){
   return a.description||`You are ${a.name}, a specialist in ${a.division}.`;
 }
 
-// Debounce search typing so we don't rebuild the full ~221-card list on every keystroke
+// Debounce search typing so we don't rebuild the full ~247-card list on every keystroke
 let _searchT=null;
 function onSearchInput(){ clearTimeout(_searchT); _searchT=setTimeout(renderList,120); }
 

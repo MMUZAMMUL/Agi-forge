@@ -32,7 +32,7 @@ team workspaces · marketplace · API access · white-label.
 
 ## Growth levers (free)
 Generous free tier · "Made with AgentForge" share links · referral program ·
-183 SEO landing pages (one per agent) · marketplace creators · Product Hunt/Reddit launch.
+247 SEO landing pages (one per agent) · marketplace creators · Product Hunt/Reddit launch.
 
 ## Rollout
 1. **Foundation** — accounts (done) → Supabase setup → cloud sync + `plan` flag.

@@ -26,7 +26,7 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
 
   // Never cache AI/provider/search/code-exec/backend calls — always go to network.
-  const liveHosts = ['api.groq.com', 'localhost', '127.0.0.1', 'api.search.brave.com', 'emkc.org', 'supabase.co', 'jsdelivr.net'];
+  const liveHosts = ['api.groq.com', 'localhost', '127.0.0.1', 'api.search.brave.com', 'emkc.org', 'jsdelivr.net'];
   if (liveHosts.some((h) => url.hostname.includes(h))) return;
 
   // Agent prompt files (raw.githubusercontent): stale-while-revalidate.

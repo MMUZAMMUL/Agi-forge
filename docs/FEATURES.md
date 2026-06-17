@@ -4,7 +4,7 @@ A detailed tour of what AgentForge can do. Everything runs client-side in a sing
 `index.html`.
 
 ## 💬 Chat
-Talk to any of the 183 specialists. Responses stream token-by-token. Each agent
+Talk to any of the 247 specialists. Responses stream token-by-token. Each agent
 carries a deep, role-specific system prompt — not a generic assistant persona.
 
 ## ⛓️ Agent Pipeline
