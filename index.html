@@ -2,27 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<!-- Content Security Policy: defense-in-depth backing the markdown HTML-escaping
+     in assets/js/ui.js. 'unsafe-inline' is required because the app uses inline
+     onclick= handlers and style= attributes throughout; connect-src stays open to
+     https + localhost so user-configured providers (Ollama) and webhooks keep
+     working, while object/base/frame-ancestors are locked down. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https: http://localhost:* http://127.0.0.1:*; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin/>
 <link rel="preconnect" href="https://api.groq.com"/>
 <link rel="dns-prefetch" href="https://emkc.org"/>
-<title>AgentForge — 219 AI Specialists</title>
-<meta name="description" content="A mobile-first agentic AI platform with 219 expert specialists, agent pipelines, auto-built teams, debate, and a code runner. Runs in your browser, free."/>
+<title>AgentForge — 247 AI Specialists</title>
+<meta name="description" content="A mobile-first agentic AI platform with 247 expert specialists, agent pipelines, auto-built teams, debate, and a code runner. Runs in your browser, free."/>
 <meta name="keywords" content="AI agents, AI specialists, agentic AI, AI team, multi-agent, AI pipeline, AI chat, free AI app, mobile AI, AI assistant, prompt engineering, code runner"/>
 <meta name="author" content="AgentForge"/>
 <link rel="canonical" href="https://mmuzammul.github.io/Agi-forge/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="AgentForge"/>
-<meta property="og:title" content="AgentForge — 219 AI Specialists in Your Browser"/>
-<meta property="og:description" content="Chat with 219 domain specialists, chain them into pipelines, auto-build the perfect team, and run the code they write. Free, runs in your browser."/>
+<meta property="og:title" content="AgentForge — 247 AI Specialists in Your Browser"/>
+<meta property="og:description" content="Chat with 247 domain specialists, chain them into pipelines, auto-build the perfect team, and run the code they write. Free, runs in your browser."/>
 <meta property="og:image" content="https://mmuzammul.github.io/Agi-forge/assets/icon-512.png"/>
 <meta property="og:url" content="https://mmuzammul.github.io/Agi-forge/"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="AgentForge — 219 AI Specialists in Your Browser"/>
-<meta name="twitter:description" content="219 expert AI specialists, pipelines, auto-built teams, debate & a code runner. Free."/>
+<meta name="twitter:title" content="AgentForge — 247 AI Specialists in Your Browser"/>
+<meta name="twitter:description" content="247 expert AI specialists, pipelines, auto-built teams, debate & a code runner. Free."/>
 <meta name="twitter:image" content="https://mmuzammul.github.io/Agi-forge/assets/icon-512.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"AgentForge","url":"https://mmuzammul.github.io/Agi-forge/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","browserRequirements":"Requires JavaScript","description":"A mobile-first agentic AI platform with 219 expert specialists, agent pipelines, auto-built teams, debate, and a code runner. Runs in your browser, free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"mmuzammul"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"AgentForge","url":"https://mmuzammul.github.io/Agi-forge/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","browserRequirements":"Requires JavaScript","description":"A mobile-first agentic AI platform with 247 expert specialists, agent pipelines, auto-built teams, debate, and a code runner. Runs in your browser, free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"mmuzammul"}}
 </script>
 <link rel="manifest" href="manifest.webmanifest"/>
 <meta name="theme-color" content="#0f1117"/>
@@ -59,7 +65,7 @@
       <div class="welcome-hero">
         <div class="big">⚡</div>
         <h1>Agent<span style="color:var(--accent2)">Forge</span></h1>
-        <p>219 AI specialists · pipelines · debate · benchmarker<br>100% free · runs in your browser · no account needed</p>
+        <p>247 AI specialists · pipelines · debate · benchmarker<br>100% free · runs in your browser · no account needed</p>
       </div>
 
       <div class="card">
@@ -155,7 +161,7 @@
   <!-- ═══════════ AGENTS ═══════════ -->
   <div id="screen-agents" class="screen">
     <div class="search-bar" style="display:flex;gap:8px">
-      <input class="search-input" id="search" placeholder="Search 219 specialists…" oninput="onSearchInput()" style="flex:1"/>
+      <input class="search-input" id="search" placeholder="Search 247 specialists…" oninput="onSearchInput()" style="flex:1"/>
       <button class="icon-btn" id="pipeline-mode-btn" onclick="togglePipelineMode()" title="Pipeline mode" style="flex-shrink:0;white-space:nowrap">⛓️ Add</button>
     </div>
     <div id="pipeline-bar" style="display:none;padding:8px 12px;background:var(--purple)11;border-bottom:1px solid var(--purple)44;font-size:13px;color:var(--purple);display:flex;align-items:center;gap:8px">

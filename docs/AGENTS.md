@@ -1,6 +1,6 @@
 # Agent Catalog
 
-The complete roster of AgentForge specialists — **183 agents across 16 divisions**.
+The complete roster of AgentForge specialists — **247 agents across 16 divisions**.
 Each agent is a Markdown system prompt at `agents/<division>/<id>.md`, fetched on
 demand by the app.
 
