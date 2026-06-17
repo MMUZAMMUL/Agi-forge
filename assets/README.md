@@ -4,7 +4,7 @@
 
 # AgentForge
 
-**219 AI specialists · Agent pipelines · Auto-built teams · Runs in your browser · Free**
+**247 AI specialists · Agent pipelines · Auto-built teams · Runs in your browser · Free**
 
 A mobile-first agentic AI platform that runs entirely in the browser — no server, no install, no build step, no cost. Powered by free [Groq](https://console.groq.com) cloud inference or a local [Ollama](https://ollama.com) model.
 
@@ -23,7 +23,7 @@ A mobile-first agentic AI platform that runs entirely in the browser — no serv
 
 | | AgentForge | Generic AI chat |
 |---|:---:|:---:|
-| 219 domain specialists, each a deep expert prompt | ✅ | ❌ |
+| 247 domain specialists, each a deep expert prompt | ✅ | ❌ |
 | Auto-builds the optimal **team** for your goal | ✅ | ❌ |
 | Multi-agent **pipelines** (chained reasoning) | ✅ | ❌ |
 | Agent-vs-agent **debate** to refine answers | ✅ | ❌ |
@@ -53,7 +53,7 @@ See [`docs/FEATURES.md`](docs/FEATURES.md) for the full breakdown.
 
 ---
 
-## The roster — 16 divisions, 219 specialists
+## The roster — 16 divisions, 247 specialists
 
 | Division | Count | Division | Count |
 |---|:---:|---|:---:|
@@ -93,7 +93,7 @@ Every agent is a structured Markdown system prompt under [`agents/<division>/`](
 
 ## Architecture
 
-AgentForge has **zero runtime dependencies** and **no build step**. The whole client is one file, `index.html`, which carries lightweight metadata (name, division, emoji, color, one-line description) for all 219 agents. Each agent's full system prompt is fetched on demand from this repo:
+AgentForge has **zero runtime dependencies** and **no build step**. The whole client is one file, `index.html`, which carries lightweight metadata (name, division, emoji, color, one-line description) for all 247 agents. Each agent's full system prompt is fetched on demand from this repo:
 
 ```
 https://raw.githubusercontent.com/mmuzammul/Agi-forge/main/agents/<division>/<id>.md
@@ -121,7 +121,7 @@ No npm, no framework, no toolchain. Deploy the folder to any static host (GitHub
 ```
 Agi-forge/
 ├── index.html              # the entire app — self-contained, no build
-├── agents/                 # 219 specialist system prompts, by division
+├── agents/                 # 247 specialist system prompts, by division
 │   ├── engineering/        # …36 agents
 │   ├── specialized/        # …45 agents
 │   └── … (16 divisions)

@@ -132,7 +132,7 @@ async function autoBuildTeam(){
     status.innerHTML='<span style="color:var(--orange)">Connect AI first — tap ⚙️</span>'; return;
   }
   btn.disabled=true; btn.textContent='✨ Assembling team…';
-  status.textContent='Analyzing goal & selecting specialists from 219 agents…';
+  status.textContent='Analyzing goal & selecting specialists from 247 agents…';
 
   // Compact roster: id|name|one-line desc, grouped — fits in context
   const roster=AGENTS.map(a=>`${a.id} | ${a.name} (${a.division}): ${a.description.slice(0,90)}`).join('\n');
