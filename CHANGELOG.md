@@ -5,7 +5,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Security
+- **Closed an XSS gap in markdown rendering.** `md()` now escapes raw HTML in
+  ordinary text before applying its limited markdown→HTML transform, so an LLM
+  response containing something like `<img onerror=…>` outside a code fence can
+  no longer execute when inserted via `innerHTML`. Code fences and inline code
+  are preserved.
+- **Added a Content-Security-Policy** meta tag (locks down `object-src`,
+  `base-uri`, `frame-ancestors`, restricts script/style/connect sources) as
+  defense-in-depth behind the escaping fix.
+
 ### Added
+- **26 previously-unreachable specialists are now wired into the app.** Valid
+  agent files existed on disk but were missing from the `AGENTS` array; the app
+  now exposes the full roster.
+
+### Fixed
+- **Agent count corrected to 247 everywhere** (app UI, landing page, manifest,
+  docs) — previously a mix of 183/219/221. Division tab counts recomputed from
+  the actual roster.
+- Removed a stale `supabase.co` entry from the service worker's host list (left
+  over from the removed auth system).
+
+### Added (earlier in this cycle)
 - **Multi-provider auto fail-over** — optional free backup engines (OpenRouter).
   When an engine is rate-limited, AgentForge switches instantly across providers
   so pipelines and long jobs no longer stall on 429s.

@@ -9,7 +9,7 @@ step.** This document explains how the pieces fit together.
 ┌─────────────────────────────────────────────┐
 │  index.html  (the whole client)             │
 │                                             │
-│  • AGENTS[]  — metadata for all 183 agents  │
+│  • AGENTS[]  — metadata for all 247 agents  │
 │      id, name, division, emoji, color,      │
 │      one-line description                    │
 │  • UI: chat, pipeline, team, debate,        │
