@@ -2,6 +2,8 @@
   "name": "AgentForge — 247 AI Specialists",
   "short_name": "AgentForge",
   "description": "A mobile-first agentic AI platform with 247 expert specialists, agent pipelines, auto-built teams, debate, and a code runner. Runs in your browser, free.",
+  "lang": "en",
+  "dir": "ltr",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

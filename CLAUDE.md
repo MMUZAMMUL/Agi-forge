@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this project is
 
-AgentForge is a mobile-first agentic AI platform — a single `index.html` web app with 247 curated AI specialists. Runs 100% in the browser, no build step, no server needed. Live at: **https://mmuzammul.github.io/Agi-forge/**
+AgentForge is a mobile-first agentic AI platform — a single `index.html` web app with 247 curated AI specialists. Runs 100% in the browser, no build step, no server needed. Live at: **https://mmuzammul.github.io/AgiForge/**
 
 This is a completely independent, original-branded project by mmuzammul. All branding is "AgentForge" only — no references to "AGI repo", "mobile.html", or any other repo.
 
@@ -65,7 +65,7 @@ page that links to `index.html`.
 Agent **metadata** (id, name, division, emoji, color, description, vibe) is defined in the `AGENTS` array in `assets/js/data.js`. The full **system prompts** live in `agents/<division>/<id>.md` and are fetched at runtime from GitHub Raw:
 
 ```js
-const GITHUB_RAW = 'https://raw.githubusercontent.com/mmuzammul/Agi-forge/main/agents';
+const GITHUB_RAW = 'https://raw.githubusercontent.com/mmuzammul/AgiForge/main/agents';
 // URL pattern: ${GITHUB_RAW}/${agent.division}/${agent.id}.md
 ```
 

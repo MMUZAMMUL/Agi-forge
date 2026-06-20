@@ -40,7 +40,7 @@ array in `assets/js/data.js`. The full system prompt is fetched the first time a
 agent is used:
 
 ```js
-const GITHUB_RAW = 'https://raw.githubusercontent.com/mmuzammul/Agi-forge/main/agents';
+const GITHUB_RAW = 'https://raw.githubusercontent.com/mmuzammul/AgiForge/main/agents';
 const url = `${GITHUB_RAW}/${agent.division}/${agent.id}.md`;
 ```
 
