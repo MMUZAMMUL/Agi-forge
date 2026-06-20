@@ -254,7 +254,7 @@ const AGENTS = [
 ];
 const DIVISIONS = [{"name":"academic","count":13},{"name":"design","count":16},{"name":"engineering","count":43},{"name":"finance","count":10},{"name":"game-development","count":5},{"name":"gis","count":10},{"name":"marketing","count":32},{"name":"paid-media","count":7},{"name":"product","count":9},{"name":"project-management","count":10},{"name":"sales","count":12},{"name":"security","count":12},{"name":"spatial-computing","count":3},{"name":"specialized","count":45},{"name":"support","count":10},{"name":"testing","count":10}];
 
-const GITHUB_RAW = 'https://raw.githubusercontent.com/mmuzammul/Agi-forge/main/agents';
+const GITHUB_RAW = 'https://raw.githubusercontent.com/mmuzammul/AgiForge/main/agents';
 
 // ── Vertical editions (white-label) ──────────────────────────────────────────
 const EDITION_KEY = new URLSearchParams(location.search).get('edition') || '';

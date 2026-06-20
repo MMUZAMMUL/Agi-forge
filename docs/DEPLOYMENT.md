@@ -12,7 +12,7 @@ every push to `main`.
 2. Under **Build and deployment → Source**, choose **GitHub Actions**.
 3. Push to `main` (or run the workflow manually from the **Actions** tab).
 4. The site goes live at `https://<user>.github.io/<repo>/`
-   — here: <https://mmuzammul.github.io/Agi-forge/>.
+   — here: <https://mmuzammul.github.io/AgiForge/>.
 
 A `.nojekyll` file is included so GitHub Pages serves the files as-is without
 running Jekyll.
@@ -37,8 +37,8 @@ running Jekyll.
 ## Local
 
 ```bash
-git clone https://github.com/MMUZAMMUL/Agi-forge.git
-cd Agi-forge
+git clone https://github.com/MMUZAMMUL/AgiForge.git
+cd AgiForge
 python3 -m http.server 8080
 # visit http://localhost:8080
 ```

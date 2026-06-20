@@ -54,7 +54,7 @@ async function groqFetchWithRetry(body, onStatus){
     const eng=chain[i];
     body.model=eng.model;
     const headers={'Content-Type':'application/json','Authorization':'Bearer '+eng.key};
-    if(eng.prov==='openrouter'){ headers['HTTP-Referer']='https://mmuzammul.github.io/Agi-forge/'; headers['X-Title']='AgentForge'; }
+    if(eng.prov==='openrouter'){ headers['HTTP-Referer']='https://mmuzammul.github.io/AgiForge/'; headers['X-Title']='AgentForge'; }
     let res;
     try{ res=await fetch(eng.url,{method:'POST',headers,body:JSON.stringify(body)}); }
     catch(err){ lastErr=err; continue; }
