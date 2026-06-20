@@ -62,15 +62,17 @@ See [`docs/FEATURES.md`](docs/FEATURES.md) for the full breakdown.
 | Division | Count | Division | Count |
 |---|:---:|---|:---:|
 | ⭐ Specialized | 45 | 🔐 Security | 12 |
-| 🏗️ Engineering | 36 | 🤝 Sales | 12 |
+| 🏗️ Engineering | 43 | 🤝 Sales | 12 |
 | 📣 Marketing | 32 | 🧪 Testing | 10 |
-| 🗺️ GIS & Spatial | 10 | 🎨 Design | 11 |
-| 💰 Finance | 9 | 📈 Paid Media | 7 |
-| 🎓 Academic | 8 | 📋 Project Management | 7 |
-| 🛟 Support | 7 | 📦 Product | 5 |
+| 🗺️ GIS & Spatial | 10 | 🎨 Design | 16 |
+| 💰 Finance | 10 | 📈 Paid Media | 7 |
+| 🎓 Academic | 13 | 📋 Project Management | 10 |
+| 🛟 Support | 10 | 📦 Product | 9 |
 | 🎮 Game Development | 5 | 🥽 Spatial Computing | 3 |
 
-Every agent is a structured Markdown system prompt under [`agents/<division>/`](agents/). Browse the complete catalog in [`docs/AGENTS.md`](docs/AGENTS.md).
+Every agent is a structured Markdown system prompt under [`agents/<division>/`](agents/).
+
+📖 **[Browse the full Agent Catalog →](docs/AGENTS.md)** — every one of the 247 specialists, organized by division, with a direct link to its system prompt.
 
 ---
 
@@ -126,19 +128,21 @@ No npm, no framework, no toolchain. Deploy the folder to any static host (GitHub
 AgiForge/
 ├── index.html              # the entire app — self-contained, no build
 ├── agents/                 # 247 specialist system prompts, by division
-│   ├── engineering/        # …36 agents
+│   ├── engineering/        # …43 agents
 │   ├── specialized/        # …45 agents
 │   └── … (16 divisions)
 ├── docs/                   # architecture, features, deployment, catalog
 │   ├── ARCHITECTURE.md
 │   ├── FEATURES.md
 │   ├── DEPLOYMENT.md
-│   └── AGENTS.md
+│   ├── AGENTS.md           # full 247-agent catalog, linked per agent
+│   └── i18n/               # README translations (9 languages)
 ├── assets/                 # logo and brand assets
 ├── .github/                # CI workflow + issue/PR templates
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
 ├── LICENSE
+├── NOTICE.md
 └── README.md
 ```
 
@@ -154,4 +158,4 @@ No analytics, no tracking, no backend. The only network calls are to your chosen
 
 ## License
 
-Free for personal, educational, and non-commercial use — modify and self-host all you like. Commercial use (selling, sublicensing, hosting as a paid product/service, or any revenue-generating use) requires the author's written permission. See [LICENSE](LICENSE) for the full terms. © 2026 mmuzammul, all rights reserved except as granted there.
+Free for personal, educational, and non-commercial use — modify and self-host all you like. Commercial use (selling, sublicensing, hosting as a paid product/service, or any revenue-generating use) requires the author's written permission. See [LICENSE](LICENSE) for the full terms and [NOTICE.md](NOTICE.md) for a plain-language summary, including terms on redistributing or bulk-extracting the agent roster. © 2026 mmuzammul, all rights reserved except as granted there.
