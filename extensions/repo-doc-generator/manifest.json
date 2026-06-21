@@ -22,10 +22,14 @@
   },
   "permissions": [
     "storage",
+    "unlimitedStorage",
     "downloads",
     "offscreen",
     "alarms",
-    "tabs"
+    "tabs",
+    "activeTab",
+    "scripting",
+    "desktopCapture"
   ],
   "host_permissions": [
     "https://api.github.com/*",

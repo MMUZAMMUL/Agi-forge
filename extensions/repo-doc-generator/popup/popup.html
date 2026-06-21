@@ -34,9 +34,9 @@
     </section>
 
     <section class="card">
-      <h2>2. Point at a repository</h2>
-      <label>GitHub repo URL or owner/repo</label>
-      <input type="text" id="repo-input" placeholder="https://github.com/owner/repo" />
+      <h2>2. Point at a repository or website</h2>
+      <label>GitHub repo URL, owner/repo, or any website URL</label>
+      <input type="text" id="repo-input" placeholder="https://github.com/owner/repo  or  https://example.com" />
 
       <details>
         <summary>Advanced (optional)</summary>
@@ -47,6 +47,20 @@
           Try to capture a screenshot of the live app (if one is linked in the repo)
         </label>
       </details>
+    </section>
+
+    <section class="card">
+      <h2>3. Screenshots & images <span class="hint-inline">(optional — manual or auto)</span></h2>
+      <p class="hint">Capture or upload images to include as a "Screenshots & Visual Reference" section in the generated document.</p>
+      <div class="capture-row">
+        <button type="button" id="capture-visible-btn" class="chip-btn">📷 Visible tab</button>
+        <button type="button" id="capture-fullpage-btn" class="chip-btn">📜 Full page</button>
+        <button type="button" id="capture-window-btn" class="chip-btn">🖥️ Window/Screen</button>
+        <button type="button" id="upload-images-btn" class="chip-btn">⬆️ Upload</button>
+      </div>
+      <input type="file" id="upload-images-input" accept="image/*" multiple hidden />
+      <p id="capture-status" class="hint-inline" hidden></p>
+      <div id="gallery" class="gallery"></div>
     </section>
 
     <button id="generate-btn" class="primary-btn">Generate Documentation</button>
