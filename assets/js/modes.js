@@ -3,9 +3,9 @@
    Do not wrap in a module/IIFE: functions are called from inline HTML handlers. */
 
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ── VOICE INPUT (Web Speech API) ─────────────────────────────────────────────
-// ══════════════════════════════════════════════════════════════════════════════
+// ═════════════════════════════════════════════════════════════════════════════════════════
+// ── VOICE INPUT (Web Speech API) ──────────────────────────────────────────────────
+// ═════════════════════════════════════════════════════════════════════════════════════════
 let _recog=null;
 function toggleVoice(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -25,9 +25,9 @@ function toggleVoice(){
   _recog.start();
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ── CODE RUNNER (Piston API) ──────────────────────────────────────────────────
-// ══════════════════════════════════════════════════════════════════════════════
+// ═════════════════════════════════════════════════════════════════════════════════════════
+// ── CODE RUNNER (Piston API) ──────────────────────────────────────────────────────────────
+// ═════════════════════════════════════════════════════════════════════════════════════════
 const LANG_MAP={python:'python',py:'python',javascript:'javascript',js:'javascript',
   typescript:'typescript',ts:'typescript',node:'javascript',bash:'bash',sh:'bash',
   ruby:'ruby',rb:'ruby',go:'go',rust:'rust',php:'php',java:'java',
@@ -68,9 +68,9 @@ async function runCode(id){
   if(btn){btn.textContent='▶ Run';btn.disabled=false;}
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ── AGENT DEBATE ──────────────────────────────────────────────────────────────
-// ══════════════════════════════════════════════════════════════════════════════
+// ═════════════════════════════════════════════════════════════════════════════════════════
+// ── AGENT DEBATE ─────────────────────────────────────────────────────────────────
+// ═════════════════════════════════════════════════════════════════════════════════════════
 let _debateRounds=2,_debateStop=false;
 
 function setDebateRounds(btn,n){
@@ -82,7 +82,10 @@ function initDebateSelects(){
   const opts=AGENTS.map(a=>`<option value="${a.id}">${a.emoji} ${a.name} · ${a.division}</option>`).join('');
   ['debate-a','debate-b'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el&&el.options.length<=1){el.innerHTML='<option value="">Select agent…</option>'+opts;}
+    if(el&&el.options.length<=1){
+      const placeholder=el.options[0]?el.options[0].outerHTML:'<option value="">Select agent…</option>';
+      el.innerHTML=placeholder+opts;
+    }
   });
 }
 
@@ -188,9 +191,9 @@ function copyDebateOutput(){
   navigator.clipboard?.writeText(txt).then(()=>alert('Copied!')).catch(()=>alert('Long-press to copy'));
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ── AGENT BENCHMARKER ─────────────────────────────────────────────────────────
-// ══════════════════════════════════════════════════════════════════════════════
+// ═════════════════════════════════════════════════════════════════════════════════════════
+// ── AGENT BENCHMARKER ──────────────────────────────────────────────────────────────
+// ═════════════════════════════════════════════════════════════════════════════════════════
 const BENCH_DEFAULTS=[
   'engineering-frontend-developer','engineering-backend-architect',
   'engineering-software-architect','design-ui-designer',
@@ -277,7 +280,7 @@ async function runBenchmark(){
     document.getElementById('bench-progress').textContent=`${i+1}/${checked.length} done`;
   }
 
-  // ── LLM judge phase: impartial model scores the actual answers ──────────────
+  // ── LLM judge phase: impartial model scores the actual answers ─────────────────────────────────────────
   let judged=false;
   if(results.length&&cfg.provider!=='demo'&&cfg.provider!=='ollama'){
     document.getElementById('bench-progress').textContent='⚖️ Judging answers…';
@@ -335,7 +338,7 @@ async function runBenchmark(){
     results.map((r,rank)=>`### #${rank+1} ${r.agent.emoji} ${r.agent.name} — ${r.score}/100\n\n${r.output||'(no output)'}`).join('\n\n---\n\n');
 }
 
-// ── LLM judge: rank candidate answers to the same prompt ──────────────────────
+// ── LLM judge: rank candidate answers to the same prompt ─────────────────────────────────────────
 async function judgeBenchmark(prompt,results){
   const candidates=results.map(r=>`### CANDIDATE ${r.i} — ${r.agent.name} (${r.agent.division})\n${(r.output||'').slice(0,2200)}`).join('\n\n');
   const sys='You are a rigorous, impartial evaluation judge. You score AI answers to the same task on quality alone — relevance to the task, technical depth, correctness, and usefulness. You are not swayed by length or formatting. Return strict JSON only.';
