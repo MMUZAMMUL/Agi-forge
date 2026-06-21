@@ -7,7 +7,7 @@
      onclick= handlers and style= attributes throughout; connect-src stays open to
      https + localhost so user-configured providers (Ollama) and webhooks keep
      working, while object/base/frame-ancestors are locked down. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https: http://localhost:* http://127.0.0.1:*; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https: http://localhost:* http://127.0.0.1:*; frame-src 'self' blob: https://translate.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin/>
 <link rel="preconnect" href="https://api.groq.com"/>
@@ -67,6 +67,7 @@
       <button class="icon-btn" id="tab-creator" onclick="showScreen('creator')" title="Create Agent" aria-label="Create agent">✏️</button>
       <button class="icon-btn" id="tab-settings" onclick="showScreen('settings')" title="Settings" aria-label="Settings">⚙️</button>
       <button class="icon-btn" id="lang-toggle" onclick="toggleAppLang()" title="Language / 语言" aria-label="Toggle language" style="font-size:11px;font-weight:700">EN</button>
+      <div id="google_translate_element" title="Translate page / 翻译页面" aria-label="Translate page"></div>
     </nav>
   </div>
 
@@ -494,6 +495,12 @@
 
 </div>
 
+<script>
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'zh-CN',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:false},'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="assets/js/app-i18n.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/ui.js"></script>
